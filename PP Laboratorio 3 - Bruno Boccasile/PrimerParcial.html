@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer Parcial Laboratorio 3 - Bruno Boccasile</title>
+</head>
+<style>
+       body{
+      display: flex;
+      justify-content: space-around;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid #000000;
+        margin-bottom: 20px;
+        background-color: rgb(230, 247, 247);
+    }
+
+    table th
+    {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #000000;
+        background-color: rgb(195, 240, 240);
+    }
+    table td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #000000;
+    }
+
+    button,
+    input[type="button"] {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 5px;
+    }
+
+    select {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 20%;
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 30%;
+        margin-bottom: 10px;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .formDatos {
+    border: 2px solid #000;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+    width: 1000px; 
+    height: 650px; 
+}
+    .formABM{
+        
+    border: 2px solid #000;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+    width: 500px; 
+    height: 520px; 
+    display: none;
+    }
+</style>
+
+<body>
+    <form id="formDatos" class="formDatos">
+        <label>Form Datos</label>
+        <br>
+        <label for="filtro">Filtrar Por:</label>
+        <select id="filtro" onchange="hacerTablaVehiculo()">
+            <option>Todos</option>
+            <option>Aereo</option>
+            <option>Terrestre</option>
+        </select>
+        <br>
+        <label for="calculo">Promedio Velocidad Máxima:</label>
+        <input type="text" id="calculo" disabled>
+        <input type="button" value="Calcular" onclick="calcularPromedio()" />
+        <br>
+        <label>Mostrar Columnas:</label>
+        <br>
+        <input type="checkbox" id="checkId" name="id" checked onchange="hacerTablaVehiculo()">id
+        <input type="checkbox" id="checkModelo" name="modelo" checked onchange="hacerTablaVehiculo()">modelo
+        <input type="checkbox" id="checkAnoFab" name="ano fab" checked onchange="hacerTablaVehiculo()">ano fab
+        <input type="checkbox" id="checkVelMax" name="vel max" checked onchange="hacerTablaVehiculo()">vel max
+        <input type="checkbox" id="checkAltMax" name="alt max" checked onchange="hacerTablaVehiculo()">alt max
+        <input type="checkbox" id="checkAutonomia" name="autonomia" checked onchange="hacerTablaVehiculo()">autonomia
+        <input type="checkbox" id="checkCantPue" name="cant pue" checked onchange="hacerTablaVehiculo()">cant pue
+        <input type="checkbox" id="checkCantRue" name="cant rue" checked onchange="hacerTablaVehiculo()">cant rue
+        <br>
+        <table id="tablaVehiculos">
+        </table>
+        <br>
+        <input type="button" id="agregar" onclick="verFormABM()" value="Agregar">
+    </form>
+
+    <form id="formABM" class="formABM">
+        <h2>Formulario ABM</h2>
+        <label for="id">ID: </label>
+        <input type="text" id="id" disabled>
+        <br>
+        <label for="modelo">Modelo: </label>
+        <input type="text" id="modelo">
+        <br>
+        <label for="anoFab">Año fabricacion: </label>
+        <input type="text" id="anoFab">
+        <br>
+        <label for="velMax">Velocidad Maxima: </label>
+        <input type="text" id="velMax">
+        <br>
+        <label for="tipo" id="lbltipo">Tipo: </label>
+        <select id="tipo" onchange="mostrarCasillasABM()">
+            <option>Aereo</option>
+            <option>Terrestre</option>
+        </select>
+        <br id="br">
+        <label for="atributo1" id="lblatributo1"></label>
+        <input type="text" id="atributo1">
+        <br>
+        <label for="atributo2" id="lblatributo2"></label>
+        <input type="text" id="atributo2">
+        <br>
+        <input type="button" id="aceptar" onclick="agregarVehiculo(), limpiarFormABM();" value="Aceptar">
+        <input type="button" id="modificar" onclick="modificarVehiculo(), limpiarFormABM();" value="Modificar" style="display: none;">
+        <input type="button" id="eliminar" onclick="eliminarVehiculo(), limpiarFormABM();" value="Eliminar" style="display: none;">
+        <input type="button" id="cancelar" onclick="verFormDatos(), limpiarFormABM();" value="Cancelar">
+
+    </form>
+</body>
+<script src="Clases.js"></script>
+<script src="FormDatos.js"></script>
+<script src="FormABM.js"></script>
+
+</html>
